@@ -13,20 +13,20 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: { //where webpack will look for the files to bundle together
-    modulesDirectories: ['node_modules', 'src'],
-    extensions: ['', '.js'] //type of file extensions webpack will expect
+    // modulesDirectories: ['node_modules', 'src'], <-- NEED TO FIX
+    extensions: ['.js', '.jsx'] //type of file extensions webpack will expect
   },
   module: { //define our loaders
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
+        loaders: ['react-hot-loader', 'babel-loader?presets[]=react,presets[]=es2015']
       }
     ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // for hot reloading
-    new webpack.NoErrorsPlugin() // won't compile with errors
+    new webpack.NoEmitOnErrorsPlugin() // won't compile with errors
   ]
 }
