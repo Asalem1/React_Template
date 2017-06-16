@@ -31,7 +31,14 @@ export default class App extends React.Component {
   }
 
   deleteTask(taskToDelete) {
-    _.remove(this.state.tasks, todo => todo.task = taskToDelete);
+    let deleted;
+    this.state.tasks.forEach(function(todo, i) {
+      if (todo.task === taskToDelete) {
+        deleted = i;
+        return;
+      }
+    })
+    this.state.tasks.splice(deleted, 1);
     this.setState({ tasks: this.state.tasks });
   }
 
@@ -53,10 +60,10 @@ export default class App extends React.Component {
         <h1>React Todos!</h1>
         <AddTask tasks={this.state.tasks} createTask={this.createTask.bind(this)}/>
         <TaskList
+          deleteTask={this.deleteTask.bind(this)}
+          saveTask={this.saveTask.bind(this)}
           toggleTask={this.toggleTask.bind(this)}
           tasks={this.state.tasks}
-          saveTask={this.saveTask.bind(this)}
-          deleteTask={this.deleteTask.bind(this)}
          />
       </div>
     );
