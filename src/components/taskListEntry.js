@@ -27,54 +27,44 @@ export default class TaskListEntry extends React.Component {
   renderActionSection() {
     if (this.state.isEditing) {
       return (
-        <td>
-          <button onClick={this.onSaveClick.bind(this)}>Save</button>
-          <button onClick={this.cancelClick.bind(this)}>Cancel</button>
-        </td>
+        <div>
+          <button className="btn" onClick={this.onSaveClick.bind(this)}><span className=" glyphicon glyphicon-ok-circle"></span> update </button>
+          <button className="btn" onClick={this.cancelClick.bind(this)}><span className=" glyphicon glyphicon-ban-circle"></span> cancel</button>
+        </div>
       );
     }
     return (
-      <td>
-        <button onClick={this.onEditClick.bind(this)}>Edit</button>
-        <button onClick={this.props.deleteTask.bind(this, this.props.task)}>Delete</button>
-      </td>
+      <div>
+        <button className="btn" onClick={this.onEditClick.bind(this)}><span className=" glyphicon glyphicon-erase"></span> edit </button>
+        <button className="btn" onClick={this.props.deleteTask.bind(this, this.props.task)}><span className="glyphicon glyphicon-remove-circle"></span> delete</button>
+      </div>
     );
   }
 
   renderTaskSection() {
-    const { task, isCompleted } = this.props;
-    const taskStyle = {
-      color: isCompleted ? 'green' : 'red',
-      cursor: 'pointer'
-    }
-
+    const task = this.props.task;
     if (this.state.isEditing) {
       return (
-        <td>
-          <form onSubmit={this.onSaveClick.bind(this)}>
+        <form onSubmit={this.onSaveClick.bind(this)}>
+          <div className="media-body">
             <input type="text" defaultValue={task} ref="editInput" />
-          </form>
-        </td>
+          </div>
+        </form>
       )
     }
     return (
-      <td
-        style={taskStyle}
-        onClick={this.props.toggleTask.bind(this, task)}
-      >
+      <div className="media-body">
         {task}
-      </td>
+      </div>
     );
   }
 
   render() {
     return (
-        <thead>
-          <tr>
-            {this.renderTaskSection()}
-            {this.renderActionSection()}
-          </tr>
-        </thead>
+        <li className="task-list-entry media">
+          {this.renderTaskSection()}
+          {this.renderActionSection()}
+       </li>
     );
   }
 }

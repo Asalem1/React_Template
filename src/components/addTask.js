@@ -40,11 +40,16 @@ export default class addTask extends React.Component {
 
   render() {
     return (
+      <div className="search-bar form-inline">
         <form onSubmit={this.handleCreate.bind(this)}>
-          <input type='text' placeholder="Add a task here!" ref="createInput" />
-          <button>Add Task</button>
-          {this.renderError()}
+          <input placeholder="Add a task here!" ref="createInput" type="text" />
+          <button className="btn">
+            <span className="glyphicon glyphicon-plus-sign"></span> add task
+          </button>
+            {this.renderError()}
         </form>
+      </div>
     );
   }
 }
+          // <button>Add Task</button>

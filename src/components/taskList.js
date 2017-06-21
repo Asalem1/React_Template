@@ -9,15 +9,9 @@ export default class TaskList extends React.Component {
   }
   render() {
     return (
-       <table>
-          <thead>
-            <tr>
-              <th>Task</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+      <ul className="task-list">
           {this.renderItems()}
-       </table>
+      </ul>
     );
   }
 }

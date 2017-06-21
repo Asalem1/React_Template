@@ -56,16 +56,27 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>React Todos!</h1>
-        <AddTask tasks={this.state.tasks} createTask={this.createTask.bind(this)}/>
-        <TaskList
-          deleteTask={this.deleteTask.bind(this)}
-          saveTask={this.saveTask.bind(this)}
-          toggleTask={this.toggleTask.bind(this)}
-          tasks={this.state.tasks}
-         />
+    <div id="app container" >
+      <h1>React Tasks!</h1>
+        <nav className="navbar">
+          <div className="col-md-6 col-md-offset-3">
+            <AddTask
+              tasks={this.state.tasks}
+              createTask={this.createTask.bind(this)}
+             />
+          </div>
+        </nav>
+        <div className="row">
+          <div className="col-md-7">
+            <TaskList
+                deleteTask={this.deleteTask.bind(this)}
+                saveTask={this.saveTask.bind(this)}
+                toggleTask={this.toggleTask.bind(this)}
+                tasks={this.state.tasks}
+              />
+          </div>
       </div>
+    </div>
     );
   }
 }
