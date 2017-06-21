@@ -18,7 +18,7 @@ export default class TaskListEntry extends React.Component {
 
   onSaveClick() {
     event.preventDefault();
-    const oldTask = this.props.task
+    const oldTask = this.props
     const newTask = this.refs.editInput.value;
     this.props.saveTask(oldTask, newTask);
     this.setState({ isEditing: false })
@@ -36,7 +36,7 @@ export default class TaskListEntry extends React.Component {
     return (
       <div>
         <button className="btn" onClick={this.onEditClick.bind(this)}><span className=" glyphicon glyphicon-erase"></span> edit </button>
-        <button className="btn" onClick={this.props.deleteTask.bind(this, this.props.task)}><span className="glyphicon glyphicon-remove-circle"></span> delete</button>
+        <button className="btn" onClick={this.props.deleteTask.bind(this, this.props)}><span className="glyphicon glyphicon-remove-circle"></span> delete</button>
       </div>
     );
   }

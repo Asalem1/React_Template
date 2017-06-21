@@ -49,8 +49,7 @@ router.put('/tasks/:id', function(req, res, next) {
   let task = req.body.task;
   let updatedTask = {};
   if (task) {
-    updatedTask = task;
-    delete updatedTask._id;
+    updatedTask.task = task;
   }
   db.tasks.update({_id: mongojs.ObjectId(req.params.id)}, updatedTask, {}, function(err, task) {
     if (err) {

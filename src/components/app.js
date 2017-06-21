@@ -15,10 +15,10 @@ export default class App extends React.Component {
     fetch('/api/tasks')
     .then((res) => res.json())
     .then((res) => {
-      console.log('here is the response get: ', res);
       res.forEach((task) => {
         this.state.tasks.push({
-          task: task.task
+          task: task.task,
+          _id: task._id
         });
       })
       this.setState({ tasks: this.state.tasks })
@@ -41,9 +41,9 @@ export default class App extends React.Component {
     })
     .then((res) => res.json())
     .then((res) => {
-      console.log('here is the response post: ', res);
       this.state.tasks.push({
-        task: res.task
+        task: res.task,
+        _id: res._id
       });
       this.setState({ tasks: this.state.tasks })
     })
@@ -54,20 +54,44 @@ export default class App extends React.Component {
 
   deleteTask(taskToDelete) {
     let deleted;
-    this.state.tasks.forEach(function(todo, i) {
-      if (todo.task === taskToDelete) {
-        deleted = i;
-        return;
-      }
-    })
-    this.state.tasks.splice(deleted, 1);
-    this.setState({ tasks: this.state.tasks });
+    fetch('/api/tasks/' + taskToDelete._id, {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        this.state.tasks.forEach(function(todo, i) {
+          if (todo.task === taskToDelete.task) {
+            deleted = i;
+            return;
+          }
+        })
+        this.state.tasks.splice(deleted, 1);
+        this.setState({ tasks: this.state.tasks });
+      })
   }
 
   saveTask(oldTask, newTask) {
-    const foundTask = _.find(this.state.tasks, todo => todo.task === oldTask);
-    foundTask.task = newTask;
-    this.setState({ tasks: this.state.tasks });
+    const foundTask = _.find(this.state.tasks, todo => todo.task === oldTask.task);
+    fetch('/api/tasks/' + oldTask._id, {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          task: newTask,
+          _id: oldTask._id
+        })
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        foundTask.task = newTask;
+        this.setState({ tasks: this.state.tasks });
+      })
   }
 
   toggleTask(task) {
