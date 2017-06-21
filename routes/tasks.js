@@ -10,18 +10,7 @@ router.get('/tasks', function(req, res, next) {
       res.status(404);
       res.send(err);
     }
-    res.json(tasks);
-  });
-});
-
-// Get Single Tasks
-router.get('/tasks/:id', function(req, res, next) {
-  db.tasks.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, task) {
-    if (err) {
-      res.status(404);
-      res.send(err);
-    }
-    res.json(task);
+    res.send(tasks);
   });
 });
 

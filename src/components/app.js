@@ -3,31 +3,53 @@ import AddTask from './addTask';
 import React from 'react';
 import TaskList from './taskList';
 
-const tasks = [
-  {
-    task: 'make React tutorial',
-    isCompleted: false
-  },
-  {
-    task: 'make coffee',
-    isCompleted: true
-  }
-  ];
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: tasks
+      tasks: []
     }
   }
 
+  componentDidMount() {
+    fetch('/api/tasks')
+    .then((res) => res.json())
+    .then((res) => {
+      console.log('here is the response get: ', res);
+      res.forEach((task) => {
+        this.state.tasks.push({
+          task: task.task
+        });
+      })
+      this.setState({ tasks: this.state.tasks })
+    })
+    .catch((err) => {
+      console.error('here is the error: ', err);
+    })
+  }
+
   createTask(task) {
-    this.state.tasks.push({
-      task: task,
-      isCompleted: false
-    });
-    this.setState({ tasks: this.state.tasks })
+    fetch('/api/tasks', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        task: task
+      })
+    })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log('here is the response post: ', res);
+      this.state.tasks.push({
+        task: res.task
+      });
+      this.setState({ tasks: this.state.tasks })
+    })
+    .catch((err) => {
+      console.error('here is the error: ', err);
+    })
   }
 
   deleteTask(taskToDelete) {

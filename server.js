@@ -25,10 +25,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/', index);
 app.use('/api', tasks);
 
-// app.get('/', function(req, res) {
-//   res.send('hurray!');
-// });
-
 app.listen(port, function() {
   console.log('we are in the mainframe: ', port);
 })

@@ -15,9 +15,8 @@ export default class addTask extends React.Component {
     const validateInput = this.validateInput(task);
     if (validateInput) {
       this.setState({ error: validateInput });
-      return
+      return;
     }
-
     this.setState({ error: null });
     this.props.createTask(task);
     this.refs.createInput.value = '';
