@@ -4,8 +4,9 @@ var path = require('path'); //helps manipulate path names
 module.exports = {
   devtool: 'inline-source-map', //gives us line numbers in case there are errors for debugging
   entry: [ //defines where webpack will look for our files
-    'webpack-dev-server/client?http://127.0.0.1:8080/',
-    'webpack/hot/only-dev-server', //allows for hot reloading
+    // UNCOMMENT webpack-dev & webpack/hot for LIVE RELOAD
+    // 'webpack-dev-server/client?http://127.0.0.1:8080/',
+    // 'webpack/hot/only-dev-server', //allows for hot reloading
     './src' //the folder where webpack will look for our initial file to run - defaults to index.html
   ],
   output: { //for deployment purposes, not necessary otherwise

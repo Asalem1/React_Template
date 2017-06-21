@@ -9,4 +9,4 @@ This app requires that the user has MongoDB and Node installed on their machines
 
 #Starting the server
 
-To start the server, simply run the npm start (or nodemon server.js if you have it installed)  in your terminal.
+To start the server, simply run the webpack --progress --colors --watch to build the your bundle, then run npm start (or nodemon server.js if you have it installed)  in your terminal.
