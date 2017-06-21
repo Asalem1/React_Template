@@ -21,11 +21,10 @@ export default class TaskListEntry extends React.Component {
     const oldTask = this.props.task
     const newTask = this.refs.editInput.value;
     this.props.saveTask(oldTask, newTask);
-   this.setState({ isEditing: false })
+    this.setState({ isEditing: false })
   }
 
   renderActionSection() {
-    console.log(this.props)
     if (this.state.isEditing) {
       return (
         <td>

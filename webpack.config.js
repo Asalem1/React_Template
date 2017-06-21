@@ -13,7 +13,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: { //where webpack will look for the files to bundle together
-    // modulesDirectories: ['node_modules', 'src'], <-- NEED TO FIX
+    modules: ['node_modules', 'src'],
     extensions: ['.js', '.jsx'] //type of file extensions webpack will expect
   },
   module: { //define our loaders
